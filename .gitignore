@@ -1,2 +1,5 @@
 node_modules/
-X_files/
+.env
+data/*.db
+logs/*
+X_files/*
