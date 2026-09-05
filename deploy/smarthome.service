@@ -1,0 +1,15 @@
+[Unit]
+Description=Smart Home server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/home/admin/.nvm/versions/node/v22.23.2/bin/node /home/admin/smarthome/src/server.js
+WorkingDirectory=/home/admin/smarthome
+Restart=on-failure
+RestartSec=5
+User=admin
+EnvironmentFile=/home/admin/smarthome/.env
+
+[Install]
+WantedBy=multi-user.target
