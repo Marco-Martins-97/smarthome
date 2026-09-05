@@ -1,7 +1,11 @@
 import "dotenv/config";
 import express from "express";
+import runMigrations from "./db/migrate.js";
 import session from "express-session";
 import { SESSION_MAX_AGE_MS, SQLiteSessionStore } from "./config/session.js";
+import authRoutes from "./routes/auth.routes.js";
+
+runMigrations();    //Run migrations before anything else
 
 const store = new SQLiteSessionStore();
 
@@ -21,6 +25,10 @@ app.use(session({
         sameSite: 'lax',
     },
 }));
+
+// Routes
+app.use('/api/auth', authRoutes);
+
 
 app.get('/', (req, res) => {
     res.status(200).send('Ok');
