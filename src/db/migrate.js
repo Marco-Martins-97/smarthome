@@ -8,7 +8,7 @@ export default function runMigrations() {
     db.exec(`
         CREATE TABLE IF NOT EXISTS schema_migrations (
             filename TEXT NOT NULL PRIMARY KEY,
-            applied_at TIMESTAMP NOT NULL
+            applied_at CURRENT_TIMESTAMP NOT NULL
         );  
     `);
 

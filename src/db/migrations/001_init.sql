@@ -15,14 +15,14 @@ CREATE TABLE stores (
     name TEXT NOT NULL UNIQUE
 );
 
-CREATE TABLE catalog (
+CREATE TABLE products (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL UNIQUE,
     price INTEGER NOT NULL CHECK (price >= 0),
     category_id INTEGER,
     store_id INTEGER,
     unit TEXT NOT NULL CHECK (unit IN ('g', 'ml', 'pack', 'unit')),
-    size NUMERIC,
+    size INTEGER NOT NULL DEFAULT 1,
     brand TEXT,
     image TEXT,
     barcode TEXT,
@@ -41,7 +41,7 @@ CREATE TABLE cart_items (
     is_selected BOOLEAN NOT NULL DEFAULT 0,
     added_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (product_id),
-    FOREIGN KEY (product_id) REFERENCES catalog (id) ON DELETE CASCADE
+    FOREIGN KEY (product_id) REFERENCES products (id) ON DELETE CASCADE
 );
 
 CREATE TABLE orders (

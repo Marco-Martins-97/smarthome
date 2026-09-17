@@ -3,7 +3,7 @@ import express from "express";
 import runMigrations from "./db/migrate.js";
 import session from "express-session";
 import { SESSION_MAX_AGE_MS, SQLiteSessionStore } from "./config/session.js";
-import authRoutes from "./routes/auth.routes.js";
+import routes from "./routes/index.js";
 
 runMigrations();    //Run migrations before anything else
 
@@ -27,7 +27,7 @@ app.use(session({
 }));
 
 // Routes
-app.use('/api/auth', authRoutes);
+app.use('/api', routes);
 
 
 app.get('/', (req, res) => {
